@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Students</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/student-details">Your Registration Details</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/all-students">View All Students Registered</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="mb-4">All Students Registered</h2>
+    <form id="filterForm" method="POST" action="/all-students">
+        <label for="course_id">Select a Course:</label>
+        <select id="course_id" name="course_id">
+          <option value="0" {% if selected_course == '0' %} selected {% endif %}>All Courses</option>
+          <option value="1" {% if selected_course == '1' %} selected {% endif %}>Python</option>
+          <option value="2" {% if selected_course == '2' %} selected {% endif %}>Math</option>
+          <option value="3" {% if selected_course == '3' %} selected {% endif %}>Machine Learning</option>
+          <!-- Add more options as needed -->
+        </select>
+    </form>
+    <div class="table-responsive mt-4">
+      <table id="studentsTable" class="table table-bordered table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Language</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if students %}
+            {% for student in students %}
+              <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+                <td>{{ student[1] }}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="7" class="text-center">No students available.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // JavaScript to handle course selection change
+    document.getElementById('course_id').addEventListener('change', function() {
+      document.getElementById('filterForm').submit();
+    });
+  </script>
+</body>
+</html>

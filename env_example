@@ -1,0 +1,2 @@
+<!-- Rename the file to [.env] and add your keys -->
+GOOGLE_API_KEY="Add your key of Google API here"
