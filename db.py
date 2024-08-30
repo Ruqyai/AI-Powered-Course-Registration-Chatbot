@@ -1,6 +1,6 @@
 import sqlite3
 
-def create_student_details_table():
+def create_student_details_tables():
     # Connect to the SQLite database (or create it if it doesn't exist)
     conn = sqlite3.connect('student_details.db')
 
@@ -18,9 +18,7 @@ def create_student_details_table():
         city TEXT,
         email TEXT,
         course INTEGER,
-        FOREIGN KEY (course) REFERENCES Courses(course_id)
-    )
-    ''')
+        FOREIGN KEY (course) REFERENCES Courses(course_id))''')
 
     # Create the Courses table if it doesn't already exist
     # This table will store details of available courses
@@ -28,17 +26,14 @@ def create_student_details_table():
     CREATE TABLE IF NOT EXISTS Courses (
         course_id INTEGER PRIMARY KEY,
         course_name TEXT NOT NULL,
-        course_description TEXT
-    )
-    ''')
+        course_description TEXT)''')
 
     # Insert predefined courses into the Courses table if they don't exist
     cursor.execute('''
     INSERT OR IGNORE INTO Courses (course_id, course_name, course_description) VALUES
     (1, 'Python', 'An introductory course on Python programming.'),
     (2, 'Math', 'A comprehensive course on Mathematics.'),
-    (3, 'Machine Learning', 'A course on the fundamentals of Machine Learning.')
-    ''')
+    (3, 'Machine Learning', 'A course on the fundamentals of Machine Learning.')''')
 
     # Commit the changes and close the connection to the database
     conn.commit()

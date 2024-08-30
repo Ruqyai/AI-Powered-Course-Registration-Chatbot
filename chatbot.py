@@ -17,7 +17,8 @@ load_dotenv()
 os.environ['GOOGLE_API_KEY'] = os.getenv('GOOGLE_API_KEY')
 
 # Initialize Gemini 1.5 Pro for chatbot functionality
-llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)  # Optional: gemini-1.5-flash or gemini-1.5-pro
+# Optional: gemini-1.5-flash or gemini-1.5-pro
+llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)  
 
 # Data model to represent student details
 class studentDetails(BaseModel):

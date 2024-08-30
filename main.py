@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import os
 from chatbot import studentDetails, chatbot_response
-from db import create_student_details_table, get_latest_student, get_all_students, delete_student, get_students_by_course
+from db import create_student_details_tables, get_latest_student, get_all_students, delete_student, get_students_by_course
 from dotenv import load_dotenv
 
 # Load environment variables from the .env file for secure configuration
@@ -15,7 +15,7 @@ app = Flask(__name__)
 os.environ['GOOGLE_API_KEY'] = os.getenv('GOOGLE_API_KEY')
 
 # Ensure the database table for student details is created when the app starts
-create_student_details_table()
+create_student_details_tables()
 
 # Initialize an empty studentDetails object to hold current student data
 current_student_details = studentDetails()
